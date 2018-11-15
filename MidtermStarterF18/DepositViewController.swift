@@ -10,6 +10,9 @@ import UIKit
 import CoreData
 
 class DepositViewController: UIViewController {
+    
+    
+    
 
     // MARK: Outlets
     // ---------------------
@@ -21,6 +24,8 @@ class DepositViewController: UIViewController {
     
     var context:NSManagedObjectContext!
     var id = ""
+    
+    
     
     // MARK: Default Functions
     // ---------------------
@@ -56,19 +61,13 @@ class DepositViewController: UIViewController {
         
         let fetchRequest:NSFetchRequest<Customer> = Customer.fetchRequest()
         
-        //WHERE email="jenelle@gmail.com"
         fetchRequest.predicate =  NSPredicate(format: "id == %@", id)
         
-        // SQL: SELECT * FROM User WHERE email="jeenlle@gmil.com"
         
         do {
-            // Send the "SELECT *" to the database
-            //  results = variable that stores any "rows" that come back from the db
-            // Note: The database will send back an array of User objects
-            // (this is why I explicilty cast results as [User]
+            
             let results = try self.context.fetch(fetchRequest) as [Customer]
             
-            // Loop through the database results and output each "row" to the screen
             print("Number of items in database: \(results.count)")
             
             for x in results {
@@ -84,26 +83,7 @@ class DepositViewController: UIViewController {
         }
         
         
-        
-//        let fetchRequest:NSFetchRequest<Customer> = Customer.fetchRequest()
-//        fetchRequest.predicate =  NSPredicate(format: "id == %@", customerIdTextBox.text!)
-//
-//        do {
-//
-//            let results = try self.context.fetch(fetchRequest) as [Customer]
-//
-//            // Loop through the database results and output each "row" to the screen
-//            print("Number of items in database: \(results.count)")
-//            let c = Customer(context: self.context)
-//            c.balance = balanceLabel.text
-//            if (results.count == 1) {
-//                print(results[0])
-//            }
-//
-//        }
-//        catch {
-//            print("Error when fetching from database")
-//        }
+
         
         
     }
@@ -112,7 +92,38 @@ class DepositViewController: UIViewController {
     @IBAction func depositButtonPressed(_ sender: Any) {
         print("you pressed the deposit button!")
         
+        print("you pressed the deposit button! and your id is = \(id)")
         
+        let fetchRequest:NSFetchRequest<Customer> = Customer.fetchRequest()
+        
+        fetchRequest.predicate =  NSPredicate(format: "id == %@", id)
+        
+        
+        do {
+            
+            let results = try self.context.fetch(fetchRequest) as [Customer]
+            print("Number of items in database: \(results.count)")
+            
+            for x in results {
+                print("Name: \(x.name)")
+                print("Balance:: \(x.balance)")
+                
+                let new =  (Int(x.balance!)! + Int(depositAmountTextBox.text!)!)
+                x.balance = String(new)
+                print("Current Balance: \(x.balance)")
+                do {
+                    try self.context.save()
+                    print("Saved deposit  to database!")
+                    messagesLabel.text = "Saved deposit  to your account"
+                }
+                catch {
+                    print("Error while saving to database")
+                }
+            }
+        }
+        catch {
+            print("Error when fetching from database")
+        }
         
         
         

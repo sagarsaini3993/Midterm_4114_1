@@ -12,7 +12,7 @@ import CoreData
 class MenuTableViewController: UITableViewController {
     
     let arr = ["Add Customer", "Bank Deposit"]
-    
+    var index = 0
 
 
     override func viewDidLoad() {
@@ -47,33 +47,17 @@ class MenuTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath)
 
-//        if cell.reuseIdentifier == "Cell1" {
-//            print("cell 1")
-//        } else if cell.reuseIdentifier == "Cell2"{
-//            print("Cell 2")
-//        }
+
 
         return cell
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let indexPath = tableView.indexPathForSelectedRow
-//        let index = indexPath?.row
-//        if (index  == 0)
-//        {
-//            let customerController = segue.destination as! AddCustomerViewController
-//            customerController.index = index!
-//            
-//        }
-//            
-//        else{
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let controller = storyboard.instantiateViewController(withIdentifier: "deposit")
-//            //self.present(controller, animated: true, completion: nil)
-//            self.navigationController?.pushViewController(controller, animated: true)
-//        }
+        if segue.identifier == "cell2" {
+            
+        }
     }
     
     
