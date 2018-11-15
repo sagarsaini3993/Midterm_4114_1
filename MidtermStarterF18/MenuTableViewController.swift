@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 class MenuTableViewController: UITableViewController {
+    
+    let arr = ["Add Customer", "Bank Deposit"]
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,23 +37,46 @@ class MenuTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return arr.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        // Configure the cell...
+//        if cell.reuseIdentifier == "Cell1" {
+//            print("cell 1")
+//        } else if cell.reuseIdentifier == "Cell2"{
+//            print("Cell 2")
+//        }
 
         return cell
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let indexPath = tableView.indexPathForSelectedRow
+//        let index = indexPath?.row
+//        if (index  == 0)
+//        {
+//            let customerController = segue.destination as! AddCustomerViewController
+//            customerController.index = index!
+//            
+//        }
+//            
+//        else{
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let controller = storyboard.instantiateViewController(withIdentifier: "deposit")
+//            //self.present(controller, animated: true, completion: nil)
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        }
+    }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.

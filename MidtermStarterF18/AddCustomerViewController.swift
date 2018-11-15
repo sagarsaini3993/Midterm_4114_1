@@ -58,7 +58,7 @@ class AddCustomerViewController: UIViewController {
         let u = Customer(context: self.context)
         u.id = x
         u.name = nameTextBox.text
-        u.balance = nameTextBox.text
+        u.balance = startingBalanceTextBox.text
         
         
         
@@ -67,7 +67,7 @@ class AddCustomerViewController: UIViewController {
             // (Send the INSERT to the database)
             try self.context.save()
             print("Saved to database!")
-            messageLabel.text = "Account created successfully"
+            messageLabel.text = "Customer created with Customer id:\(x)"
         }
         catch {
             print("Error while saving to database")
